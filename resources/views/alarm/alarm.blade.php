@@ -1,5 +1,5 @@
 @extends('template.main')
-@section('title', 'Apar')
+@section('title', 'Alarm')
 @section('content')
 
 <div class="content-wrapper">
@@ -30,8 +30,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="text-right">
-                                <a href="/apar/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add
-                                    Apar</a>
+                                <a href="/alarm/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add
+                                    Alarm</a>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -49,7 +49,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($apar as $data)
+                                    @foreach ($alarm as $data)
                                     <tr>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->kode }}</td>
@@ -64,7 +64,7 @@
                                         </td>
                                         <td>{{ $data->status }}</td>
                                         <td>
-                                            <a href="{{ route('apar.edit', $data->id) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('alarm.edit', $data->id) }}" class="btn btn-primary">Edit</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $data->id }}">Delete</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="deleteModal{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -81,7 +81,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                            <form action="{{ route('apar.destroy', $data->id) }}" method="POST">
+                                                            <form action="{{ route('alarm.destroy', $data->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger">Hapus</button>

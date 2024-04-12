@@ -7,8 +7,7 @@
     <title>@yield('title') | Andis Dev</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Font Awesome 6 Icons -->
@@ -32,8 +31,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/" class="nav-link">Dashboard</a>
@@ -56,8 +54,7 @@
                     <div class="navbar-search-block">
                         <form class="form-inline">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fas fa-search"></i>
@@ -179,8 +176,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/dashboard" class="brand-link">
-                <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Andis Dev</span>
             </a>
 
@@ -211,8 +207,7 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -231,12 +226,21 @@
                                 </p>
                             </a>
                         </li>
-                
+
                         <li class="nav-item">
                             <a href="/apar" class="nav-link">
                                 <i class="nav-icon fa-solid fa-box"></i>
                                 <p>
                                     Apar
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/alarm" class="nav-link">
+                                <i class="nav-icon fa-solid fa-box"></i>
+                                <p>
+                                    Alarm
                                 </p>
                             </a>
                         </li>

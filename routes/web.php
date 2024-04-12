@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AparController;
+use App\Http\Controllers\AlarmController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangController;
@@ -30,3 +31,4 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 //route barang
 Route::resource('/barang', BarangController::class)->middleware('auth');
 Route::resource('/apar', AparController::class)->middleware('auth');
+Route::resource('/alarm', AlarmController::class)->middleware('auth');
