@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash; // Tambahkan ini
 
 class UsersTableSeeder extends Seeder
 {
@@ -18,8 +19,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' =>  'User',
                 'email' => 'user@gmail.com',
-                'password' => Hash::make('user123'),
-                'role' => 'user',
+                'password' => Hash::make('user123')
             ]
         ]);
     }

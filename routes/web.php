@@ -5,6 +5,7 @@ use App\Http\Controllers\AlarmController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\HydrantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,4 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 Route::resource('/barang', BarangController::class)->middleware('auth');
 Route::resource('/apar', AparController::class)->middleware('auth');
 Route::resource('/alarm', AlarmController::class)->middleware('auth');
+Route::resource('/hydrant', HydrantController::class)->middleware('auth');
