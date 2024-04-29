@@ -46,7 +46,6 @@ class AparController extends Controller
 
         $request->validate([
             'nama' => 'required|min:5',
-            'kode' => 'required|unique:apars|min:2',
             'lokasi' => 'required|max:20',
             'supplier' => 'required|min:3',
             'media' => 'required|mimes:jpeg,png,jpg,pdf|max:2048', // Maksimal 2MB
@@ -59,7 +58,7 @@ class AparController extends Controller
 
         $apar = new Apar();
         $apar->nama = $request->nama;
-        $apar->kode = $request->kode;
+        $apar->kode = uniqid(); // Menghasilkan kode unik secara otomatis
         $apar->lokasi = $request->lokasi;
         $apar->supplier = $request->supplier;
         $apar->media = $fileName; // Simpan nama file
@@ -109,10 +108,9 @@ class AparController extends Controller
 
         $request->validate([
             'nama' => 'required|min:5',
-            'kode' => 'required|min:2',
             'lokasi' => 'required|max:20',
             'supplier' => 'required|min:3',
-            'media' => 'required|mimes:jpeg,png,jpg,pdf|max:2048', // Maksimal 2MB
+            'media' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048', // Maksimal 2MB
             'status' => 'required|in:good,no', // Menambahkan rule in:good,no
             'user_id' => 'required|exists:users,id' // Menambahkan rule exists:users,id
         ], $messages);
@@ -124,7 +122,6 @@ class AparController extends Controller
         }
 
         $apar->nama = $request->nama;
-        $apar->kode = $request->kode;
         $apar->lokasi = $request->lokasi;
         $apar->supplier = $request->supplier;
         $apar->status = $request->status;
@@ -146,8 +143,6 @@ class AparController extends Controller
 
         return redirect('/apar');
     }
-
-
 
     /**
      * Remove the specified resource from storage.

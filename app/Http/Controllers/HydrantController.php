@@ -58,7 +58,7 @@ class HydrantController extends Controller
 
         $hydrant = new Hydrant();
         $hydrant->nama = $request->nama;
-        $hydrant->kode = $request->kode;
+        $hydrant->kode = uniqid(); // Menghasilkan kode unik secara otomatis
         $hydrant->lokasi = $request->lokasi;
         $hydrant->supplier = $request->supplier;
         $hydrant->media = $fileName; // Simpan nama file

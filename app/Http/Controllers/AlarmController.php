@@ -59,7 +59,7 @@ class AlarmController extends Controller
 
         $alarm = new Alarm();
         $alarm->nama = $request->nama;
-        $alarm->kode = $request->kode;
+        $alarm->kode = uniqid(); // Menghasilkan kode unik secara otomatis
         $alarm->lokasi = $request->lokasi;
         $alarm->supplier = $request->supplier;
         $alarm->media = $fileName; // Simpan nama file
