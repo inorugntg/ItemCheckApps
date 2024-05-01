@@ -30,8 +30,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="text-right">
-                                <a href="/apar/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add
-                                    Apar</a>
+                                <a href="/apar/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Apar</a>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -45,6 +44,7 @@
                                         <th>Supplier</th>
                                         <th>Media</th>
                                         <th>Status</th>
+                                        <th>QR Code</th> <!-- Tambah kolom QR Code -->
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -63,6 +63,12 @@
                                             @endif
                                         </td>
                                         <td>{{ $data->status }}</td>
+                                        <!-- Tambah Kolom QR Code -->
+                                        <td>
+                                            @if ($data->qr_code)
+                                            <img class="img-thumbnail" src="{{ asset('storage/qr_codes/' . $data->qr_code) }}" alt="QR Code">
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{ route('apar.edit', $data->id) }}" class="btn btn-primary">Edit</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $data->id }}">Delete</button>

@@ -36,4 +36,4 @@ Route::resource('/apar', AparController::class)->middleware('auth');
 Route::resource('/alarm', AlarmController::class)->middleware('auth');
 Route::resource('/hydrant', HydrantController::class)->middleware('auth');
 
-Route::get('/scan',ScanController::class,'index')->name('scan');
+// Route::get('/scan',ScanController::class,'index')->name('scan');

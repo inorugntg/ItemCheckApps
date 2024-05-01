@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Apar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\File;
 
 class AparController extends Controller
 {
@@ -34,6 +36,9 @@ class AparController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $messages = [
@@ -53,9 +58,21 @@ class AparController extends Controller
             'user_id' => 'required|exists:users,id' // Menambahkan rule exists:users,id
         ], $messages);
 
+        // Simpan file media
         $fileName = time() . '_' . $request->file('media')->getClientOriginalName();
         $filePath = $request->file('media')->storeAs('media', $fileName, 'public');
 
+        // Buat QR code
+        $qrCode = QrCode::size(200)->generate($request->nama);
+
+        // Simpan QR code sebagai gambar
+        // Simpan QR code sebagai gambar PNG
+        $qrFileName = time() . '_qr.png';
+        $qrFilePath = 'qr_codes/' . $qrFileName;
+        QrCode::format('png')->size(200)->generate($request->nama, public_path($qrFilePath));
+
+
+        // Simpan data Apar
         $apar = new Apar();
         $apar->nama = $request->nama;
         $apar->kode = uniqid(); // Menghasilkan kode unik secara otomatis
@@ -64,12 +81,14 @@ class AparController extends Controller
         $apar->media = $fileName; // Simpan nama file
         $apar->status = $request->status;
         $apar->user_id = $request->user_id; // Ambil user_id dari form
+        $apar->qr_code = $qrFileName; // Simpan nama file QR code
         $apar->save();
 
         Alert::success('Success', 'Apar has been added');
 
         return redirect('/apar')->with('messages', $messages);
     }
+
 
     /**
      * Display the specified resource.
@@ -90,7 +109,7 @@ class AparController extends Controller
     {
         $apar = Apar::findOrFail($id); // Ambil data Apar berdasarkan ID
         $users = User::all(); // Retrieve all users
-        return view('apar.apar-edit', compact('users','apar'));
+        return view('apar.apar-edit', compact('users', 'apar'));
     }
 
     /**
@@ -135,6 +154,25 @@ class AparController extends Controller
             Storage::disk('public')->delete('media/' . $apar->media);
 
             $apar->media = $fileName; // Simpan nama file
+        }
+
+        // Update QR code if necessary
+        if ($apar->wasChanged(['nama', 'lokasi', 'supplier', 'status', 'user_id'])) {
+            // Generate new QR code
+            $qrCode = QrCode::size(200)->generate($apar->nama);
+
+            // Simpan QR code sebagai gambar
+            $qrFileName = time() . '_qr.png';
+            $qrFilePath = 'qr_codes/' . $qrFileName;
+            Storage::disk('public')->put($qrFilePath, $qrCode);
+
+            // Hapus QR code lama jika ada
+            if ($apar->qr_code) {
+                Storage::disk('public')->delete('qr_codes/' . $apar->qr_code);
+            }
+
+            // Update QR code field
+            $apar->qr_code = $qrFileName;
         }
 
         $apar->save();

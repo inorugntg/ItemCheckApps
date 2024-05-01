@@ -154,5 +154,32 @@
     </div>
   </div>
 </div>
-
 @endsection
+@push('scripts')
+<script>
+  // Add event listener to form submit event
+  document.getElementById('aparForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form data
+    var formData = new FormData(this);
+
+    // Send AJAX request to store data
+    axios.post(this.action, formData)
+      .then(function(response) {
+        // Handle success
+        alert('Apar has been added successfully!');
+        
+        // Generate QR code
+        var qrCodeUrl = response.data.qr_code_url; // Assuming your controller returns QR code URL
+        
+        // Redirect to desired page or show QR code image
+        window.location.href = qrCodeUrl; // Redirect to QR code URL
+      })
+      .catch(function(error) {
+        // Handle error
+        alert('An error occurred while adding Apar.');
+      });
+  });
+</script>
+@endpush

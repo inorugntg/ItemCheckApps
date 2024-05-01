@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('supplier');
             $table->string('media');
             $table->string('status');
+            $table->string('qr_code')->nullable(); // Tambahkan kolom qr_code
             $table->unsignedBigInteger('user_id')->nullable(); 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
