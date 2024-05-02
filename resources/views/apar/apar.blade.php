@@ -35,6 +35,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            @if($apar && count($apar) > 0)
                             <table id="example1" class="table table-striped table-bordered table-hover text-center" style="width: 100%">
                                 <thead>
                                     <tr>
@@ -44,7 +45,7 @@
                                         <th>Supplier</th>
                                         <th>Media</th>
                                         <th>Status</th>
-                                        <th>QR Code</th> <!-- Tambah kolom QR Code -->
+                                        <th>QR code</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -65,9 +66,7 @@
                                         <td>{{ $data->status }}</td>
                                         <!-- Tambah Kolom QR Code -->
                                         <td>
-                                            @if ($data->qr_code)
-                                            <img class="img-thumbnail" src="{{ asset('storage/qr_codes/' . $data->qr_code) }}" alt="QR Code">
-                                            @endif
+                                            <a href="{{ route('generate',$data->id) }}" class="btn btn-primary">Generate</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('apar.edit', $data->id) }}" class="btn btn-primary">Edit</a>
@@ -101,6 +100,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @else
+                            <p>No data available</p>
+                            @endif
                         </div>
                         <!-- /.card-body -->
                     </div>

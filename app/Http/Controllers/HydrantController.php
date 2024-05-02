@@ -71,6 +71,13 @@ class HydrantController extends Controller
         return redirect('/hydrant');
     }
 
+    public function generate($id)
+    {
+        $hydrant = Hydrant::findOrFail($id);
+        $qrcode = QrCode::size(400)->generate($hydrant->nama);
+        return view('hydrant.qrcode', compact('qrcode'));
+    }
+
     /**
      * Display the specified resource.
      */

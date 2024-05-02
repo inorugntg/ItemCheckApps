@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\ScanController;
+use App\Models\Hydrant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,4 +37,6 @@ Route::resource('/apar', AparController::class)->middleware('auth');
 Route::resource('/alarm', AlarmController::class)->middleware('auth');
 Route::resource('/hydrant', HydrantController::class)->middleware('auth');
 
-// Route::get('/scan',ScanController::class,'index')->name('scan');
+Route::get('qrcode/{id}', [AparController::class, 'generate'])->name('generate');
+// Route::get('qrcode/{id}', [AlarmController::class, 'generate'])->name('generate');
+// Route::get('qrcode/{id}', [HydrantController::class, 'generate'])->name('generate');

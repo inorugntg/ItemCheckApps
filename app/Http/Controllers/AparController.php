@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
+use Milon\Barcode\Facades\DNS1D;
 
 class AparController extends Controller
 {
@@ -62,16 +63,6 @@ class AparController extends Controller
         $fileName = time() . '_' . $request->file('media')->getClientOriginalName();
         $filePath = $request->file('media')->storeAs('media', $fileName, 'public');
 
-        // Buat QR code
-        $qrCode = QrCode::size(200)->generate($request->nama);
-
-        // Simpan QR code sebagai gambar
-        // Simpan QR code sebagai gambar PNG
-        $qrFileName = time() . '_qr.png';
-        $qrFilePath = 'qr_codes/' . $qrFileName;
-        QrCode::format('png')->size(200)->generate($request->nama, public_path($qrFilePath));
-
-
         // Simpan data Apar
         $apar = new Apar();
         $apar->nama = $request->nama;
@@ -81,7 +72,8 @@ class AparController extends Controller
         $apar->media = $fileName; // Simpan nama file
         $apar->status = $request->status;
         $apar->user_id = $request->user_id; // Ambil user_id dari form
-        $apar->qr_code = $qrFileName; // Simpan nama file QR code
+
+
         $apar->save();
 
         Alert::success('Success', 'Apar has been added');
@@ -89,6 +81,12 @@ class AparController extends Controller
         return redirect('/apar')->with('messages', $messages);
     }
 
+    public function generate($id)
+    {
+        $apar = Apar::findOrFail($id);
+        $qrcode = QrCode::size(400)->generate($apar->nama);
+        return view('apar.qrcode', compact('qrcode'));
+    }
 
     /**
      * Display the specified resource.
@@ -154,25 +152,6 @@ class AparController extends Controller
             Storage::disk('public')->delete('media/' . $apar->media);
 
             $apar->media = $fileName; // Simpan nama file
-        }
-
-        // Update QR code if necessary
-        if ($apar->wasChanged(['nama', 'lokasi', 'supplier', 'status', 'user_id'])) {
-            // Generate new QR code
-            $qrCode = QrCode::size(200)->generate($apar->nama);
-
-            // Simpan QR code sebagai gambar
-            $qrFileName = time() . '_qr.png';
-            $qrFilePath = 'qr_codes/' . $qrFileName;
-            Storage::disk('public')->put($qrFilePath, $qrCode);
-
-            // Hapus QR code lama jika ada
-            if ($apar->qr_code) {
-                Storage::disk('public')->delete('qr_codes/' . $apar->qr_code);
-            }
-
-            // Update QR code field
-            $apar->qr_code = $qrFileName;
         }
 
         $apar->save();

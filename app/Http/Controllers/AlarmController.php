@@ -72,6 +72,13 @@ class AlarmController extends Controller
         return redirect('/alarm');
     }
 
+    public function generate($id)
+    {
+        $alarm = Alarm::findOrFail($id);
+        $qrcode = QrCode::size(400)->generate($alarm->nama);
+        return view('alarm.qrcode', compact('qrcode'));
+    }
+
     /**
      * Display the specified resource.
      */

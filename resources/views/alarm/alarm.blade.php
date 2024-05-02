@@ -64,6 +64,9 @@
                                         </td>
                                         <td>{{ $data->status }}</td>
                                         <td>
+                                            <a href="{{ route('generate',$data->id) }}" class="btn btn-primary">Generate</a>
+                                        </td>
+                                        <td>
                                             <a href="{{ route('alarm.edit', $data->id) }}" class="btn btn-primary">Edit</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $data->id }}">Delete</button>
                                             <!-- Modal -->
