@@ -108,6 +108,7 @@ class AparController extends Controller
         $apar = Apar::findOrFail($id); // Ambil data Apar berdasarkan ID
         $users = User::all(); // Retrieve all users
         return view('apar.apar-edit', compact('users', 'apar'));
+        ////////
     }
 
     /**
