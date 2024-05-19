@@ -64,7 +64,7 @@
                                         </td>
                                         <td>{{ $data->status }}</td>
                                         <td>
-                                            <a href="{{ route('generate',$data->id) }}" class="btn btn-primary">Generate</a>
+                                            <a href="{{ route('generate.alarm',$data->id) }}" class="btn btn-primary">Generate</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('alarm.edit', $data->id) }}" class="btn btn-primary">Edit</a>

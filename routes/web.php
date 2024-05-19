@@ -37,6 +37,6 @@ Route::resource('/apar', AparController::class)->middleware('auth');
 Route::resource('/alarm', AlarmController::class)->middleware('auth');
 Route::resource('/hydrant', HydrantController::class)->middleware('auth');
 
-Route::get('qrcode/{id}', [AparController::class, 'generate'])->name('generate');
-// Route::get('qrcode/{id}', [AlarmController::class, 'generate'])->name('generate');
-// Route::get('qrcode/{id}', [HydrantController::class, 'generate'])->name('generate');
+Route::get('qrcode/apar/{id}', [AparController::class, 'generate'])->name('generate.apar');
+Route::get('qrcode/alarm/{id}', [AlarmController::class, 'generate'])->name('generate.alarm');
+Route::get('qrcode/hydrant/{id}', [HydrantController::class, 'generate'])->name('generate.hydrant');

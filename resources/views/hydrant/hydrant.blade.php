@@ -64,7 +64,7 @@
                                         </td>
                                         <td>{{ $data->status }}</td>
                                         <td>
-                                            <a href="{{ route('generate',$data->id) }}" class="btn btn-primary">Generate</a>
+                                            <a href="{{ route('generate.hydrant',$data->id) }}" class="btn btn-primary">Generate</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('hydrant.edit', $data->id) }}" class="btn btn-primary">Edit</a>

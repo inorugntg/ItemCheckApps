@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Hydrant;
 use Illuminate\Support\Facades\Storage; // Import untuk menyimpan file
 use RealRashid\SweetAlert\Facades\Alert;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
 
 class HydrantController extends Controller

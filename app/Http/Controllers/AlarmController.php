@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Alarm;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage; // Import untuk menyimpan file
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -96,7 +97,7 @@ class AlarmController extends Controller
      */
     public function edit(string $id)
     {
-        $alarm = Alarm::findOrFail($id); // Ambil data Apar berdasarkan ID
+        $alarm = Alarm::findOrFail($id); // Ambil data Alarm berdasarkan ID
         $users = User::all(); // Retrieve all users
         return view('alarm.alarm-edit', compact('users','alarm'));
     }

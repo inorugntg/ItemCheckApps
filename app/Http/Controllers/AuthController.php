@@ -25,7 +25,6 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-
         User::where('email', $credentials);
 
         if (Auth::attempt($credentials)) {
@@ -66,7 +65,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
+        
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         Alert::success('Success', 'Log out success !');

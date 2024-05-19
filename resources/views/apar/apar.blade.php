@@ -66,7 +66,7 @@
                                         <td>{{ $data->status }}</td>
                                         <!-- Tambah Kolom QR Code -->
                                         <td>
-                                            <a href="{{ route('generate',$data->id) }}" class="btn btn-primary">Generate</a>
+                                            <a href="{{ route('generate.apar',$data->id) }}" class="btn btn-primary">Generate</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('apar.edit', $data->id) }}" class="btn btn-primary">Edit</a>
